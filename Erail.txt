@@ -1,0 +1,71 @@
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class launchErail {
+	public static void main(String[] args) {
+		//To set System Property
+		System.setProperty("webdriver.chrome.driver","./driver/chromedriver.exe");
+		//To Open new Chromedriver
+		ChromeDriver driver=new ChromeDriver();
+		//To open an URL
+		driver.get("https://erail.in");
+		//MAXIMIZE WINDOW
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(30,TimeUnit.SECONDS);
+		//Click on Sort date
+        driver.findElementById("chkSelectDateOnly").click();
+        //Enter values in Input Station
+        driver.findElementById("txtStationFrom").clear();
+        driver.findElementById("txtStationFrom").sendKeys("Chennai",Keys.ENTER);
+        //Enter values in to Station
+        driver.findElementById("txtStationTo").clear();
+        driver.findElementById("txtStationTo").sendKeys("New Delhi",Keys.ENTER);
+        
+        Set<String> set = new HashSet<String>();
+		 //Store all the train names in a list	
+		 List<WebElement> trainlist=driver.findElementsByXPath("//table[@class='DataTable TrainList TrainListHeader']//td[2]");
+		 System.out.println("List of trains : ");
+		 
+			
+		  for(int i=0;i<trainlist.size();i++) {
+			WebElement list =trainlist.get(i);
+			System.out.println(list.getText());
+                        //Get list size
+			System.out.println("List Size: " + trainlist.size());
+			
+			//Add list into Set
+			set.add(list.getText());
+			
+			
+		}
+		 
+		System.out.println("Set of train names added from list to set: ");
+		System.out.println("-------------------------------------------");
+		
+         for (String eachvalue : set) {
+			System.out.println(eachvalue);
+			 			}
+		 
+		 //Get the size of set
+		 System.out.println("Set Size: " + set.size());
+		 System.out.println("-------------------------------------------");
+		 
+		// Compare the Size of list and Set and verify values
+		 if(trainlist.size()==(set.size()))
+		 {
+			 System.out.println("Train names in list and set matches");
+			}
+		 else {
+				System.out.println("Train Names in list and set does not match");
+			}
+			driver.close();
+		  }
+	
+	}
