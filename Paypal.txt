@@ -1,0 +1,65 @@
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+public class paypalclass {
+			
+			public static void main(String[] args) {
+				String text="Paypal India";
+				//To convert string to Character Array
+				char[] c = text.toCharArray();
+				System.out.println("Converting text to character array");
+				for (int i = 0; i < c.length; i++) {
+					System.out.println(c[i]);
+					
+				}
+			//Declare a set as charset :	
+			Set<Character> charset=new LinkedHashSet<Character>();
+			
+			//Declare a set as Dupcharset:
+			Set<Character>dupcharset=new LinkedHashSet<Character>();
+ 
+			//Iterate character array and adding into charset:
+			for (int i = 0; i < c.length; i++) {
+			System.out.println(c[i]);
+			charset.add(c[i]);
+			 System.out.println("Elements added to charset " +charset);
+			 
+			//Charset if already present in character array adding into dupcharset and removing values from charset
+			if(charset.contains(c[i]))
+			{
+				dupcharset.add(c[i]);
+				System.out.println("dupcharset is"+dupcharset);
+			
+				
+			}
+			//Removal of dupchar characters present in charset:
+			charset.removeAll(dupcharset);
+			System.out.println("Removal of dupcharset present in charset  " +charset);
+			
+				}
+			
+			//Check iterator variable is not equal to empty space
+				for (Character eachcharacter : charset) {
+					if(eachcharacter!= null)
+					{
+					System.out.println(eachcharacter);	
+					}
+					else
+					
+					{
+						System.out.println(charset);
+					}
+		
+					
+				}
+			}
+		
+			
+		
+
+
+			
+			}
+
+
